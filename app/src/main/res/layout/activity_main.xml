@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="12dp"
+    tools:context=".ui.MainActivity">
+
+
+    <!-- Qr read pane-->
+    <RelativeLayout
+        android:id="@+id/qr_code_pane"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/qr_code"
+                android:layout_gravity="center_horizontal"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_qr_read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="12dp"
+                android:layout_gravity="center_horizontal"
+                android:text="QR Kod Okut"
+                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:fontFamily="@font/helvetica_neue"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/btn_gradient"/>
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <!--Order Panel-->
+    <RelativeLayout
+        android:id="@+id/orders_pane"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_orders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="12dp"
+            android:visibility="visible"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/menu_pane"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="4dp"
+            android:visibility="gone"
+            app:cardCornerRadius="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:textAlignment="center"
+                            android:maxLength="20"
+                            android:text="MENÜ"
+                            android:textColor="@color/colorBrown"
+                            android:textSize="24dp"
+                            android:textStyle="normal" />
+
+                        <ImageView
+                            android:id="@+id/iv_close_menu"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_baseline_close_24"
+                            android:layout_alignParentEnd="true"/>
+
+                    </RelativeLayout>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_menu_items"
+                        android:layout_width="match_parent"
+                        android:layout_height="224dp"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_add"
+                        android:layout_width="72dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="12dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Ekle"
+                        android:textSize="18sp"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/helvetica_neue"
+                        android:textColor="@color/colorWhite"
+                        android:background="@drawable/btn_gradient"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:cardCornerRadius="32dp"
+            app:cardBackgroundColor="@color/colorGreen"
+            android:layout_margin="12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/iv_open_menu"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_add_24"
+                android:layout_gravity="center"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</RelativeLayout>

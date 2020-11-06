@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <!-- <data>
+        <variable name="viewmodel"
+            type="com.tahiriko.beelearn.ui.auth.AuthViewModel"/>
+    </data> -->
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.auth.LoginActivity">
+
+        <!--Header-->
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cafe Adı"
+            android:fontFamily="@font/futurab"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:maxLength="20"
+            android:textColor="@color/colorBrown"
+            android:layout_marginTop="40dp"
+            android:textSize="32sp"/>
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingHorizontal="20dp"
+            android:hint="Email"
+            android:layout_marginHorizontal="20dp"
+            android:maxLines="1"
+            android:maxLength="40"
+            android:background="@drawable/edit_text_bg"
+            android:layout_marginTop="50dp"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingHorizontal="20dp"
+            android:background="@drawable/edit_text_bg"
+            android:hint="Şifre"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="10dp"
+            android:inputType="textPassword"/>
+
+        <TextView
+            android:id="@+id/tv_forgot_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Şifremi unuttum"
+            android:fontFamily="@font/helvetica_neue"
+            android:textStyle="normal"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:maxLength="20"
+            android:textColor="@color/colorLightBrown"
+            android:layout_marginTop="16dp"
+            android:textSize="12sp"/>
+
+        <!--login button-->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Giriş"
+            android:textSize="24sp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/helvetica_neue"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/btn_gradient"/>
+
+
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/btn_google_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="veya"
+            android:fontFamily="@font/helvetica_neue"
+            android:textStyle="normal"
+            android:layout_gravity="center"
+            android:maxLength="20"
+            android:textColor="@color/colorDarkPurple"
+            android:layout_marginTop="16dp"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yeni Hesap Aç"
+            android:fontFamily="@font/helvetica_neue"
+            android:textStyle="normal"
+            android:layout_gravity="center"
+            android:maxLength="30"
+            android:textColor="@color/colorLightBrown"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
