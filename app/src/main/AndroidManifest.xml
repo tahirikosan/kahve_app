@@ -2,12 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tahir.kahveapp">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
-
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kahveapp">
-        <activity android:name=".ui.ProfileActivity"></activity>
+        <activity android:name=".ui.EditEmailActivity"></activity>
+        <activity android:name=".ui.EditNameActivity" />
+        <activity android:name=".ui.EditPasswordActivity" />
+        <activity android:name=".ui.ProfileActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.CaptureAct" />
         <activity android:name=".ui.LoginActivity" />
@@ -27,14 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-        <activity android:name=".ui.MainActivity"
+        <activity
+            android:name=".ui.MainActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-
-
+            android:windowSoftInputMode="stateAlwaysHidden" />
     </application>
 
 </manifest>

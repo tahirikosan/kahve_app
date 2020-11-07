@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Define background of progres bar-->
+    <item>
+        <shape>
+            <gradient
+                android:startColor="@color/colorLightBrown"
+                android:centerColor="@color/colorLightBrown"
+                android:endColor="@color/colorLightBrown"
+                android:angle="270"/>
+            <corners android:radius="24dp"/>
+        </shape>
+    </item>
+
+    <!-- Define the progress properties-->
+    <item>
+        <clip>
+            <shape>
+                <gradient
+                    android:startColor="@color/colorGreen"
+                    android:centerColor="@color/colorGreen"
+                    android:endColor="@color/colorGreen"
+                    android:centerY="1.0"
+                    android:angle="270"/>
+                <corners android:radius="24dp"/>
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

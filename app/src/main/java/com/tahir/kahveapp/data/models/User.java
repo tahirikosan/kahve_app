@@ -1,6 +1,7 @@
 package com.tahir.kahveapp.data.models;
 
 import com.google.firebase.database.Exclude;
+import com.google.firebase.firestore.FieldValue;
 
 import java.io.Serializable;
 
@@ -10,6 +11,7 @@ public class User implements Serializable {
     private String id;
     private String name;
     private String email;
+    private int point;
 
     @Exclude
     private boolean isAuthenticated;
@@ -24,10 +26,20 @@ public class User implements Serializable {
 
     public User(){}
 
-    public User(String id, String name, String email) {
+    public User(String id, String name, String email, int point) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.point = point;
+    }
+
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
     }
 
     public String getId() {

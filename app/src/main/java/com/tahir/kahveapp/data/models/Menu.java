@@ -6,7 +6,7 @@ public class Menu {
 
     private String itemName;
     private String itemImageUrl;
-    private String itemPrice;
+    private float itemPrice;
 
     @Exclude
     private boolean isSucces;
@@ -21,7 +21,7 @@ public class Menu {
 
     }
 
-    public Menu(String itemName, String itemImageUrl, String itemPrice) {
+    public Menu(String itemName, String itemImageUrl, float itemPrice) {
         this.itemName = itemName;
         this.itemImageUrl = itemImageUrl;
         this.itemPrice = itemPrice;
@@ -35,11 +35,11 @@ public class Menu {
         isChoosen = choosen;
     }
 
-    public String getItemPrice() {
+    public float getItemPrice() {
         return itemPrice;
     }
 
-    public void setItemPrice(String itemPrice) {
+    public void setItemPrice(float itemPrice) {
         this.itemPrice = itemPrice;
     }
 

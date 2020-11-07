@@ -6,6 +6,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -15,12 +21,23 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tahir.kahveapp.data.models.User;
 import com.tahir.kahveapp.utils.SharedPrefData;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Field;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +58,7 @@ public class AuthRepository {
         mAuth = FirebaseAuth.getInstance();
 
         db = FirebaseFirestore.getInstance();
+
     }
 
 
@@ -57,11 +75,12 @@ public class AuthRepository {
                     FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
                     if (firebaseUser != null) {
+
                         String uid = firebaseUser.getUid();
                         String email = firebaseUser.getEmail();
                         String name = firebaseUser.getDisplayName();
 
-                        User user = new User(uid, name, email);
+                        User user = new User(uid, name, email,10);
                         user.setNew(isNewUser);
                         user.setSuccess(true);
                         authenticatedUser.setValue(user);
@@ -91,6 +110,7 @@ public class AuthRepository {
         cloudUser.put("id", authenticatedUser.getId());
         cloudUser.put("name", authenticatedUser.getName());
         cloudUser.put("email", authenticatedUser.getEmail());
+        cloudUser.put("point", 0);
 
         FirebaseUser mCurrentUser = mAuth.getCurrentUser();
         // auth user
@@ -136,7 +156,7 @@ public class AuthRepository {
                         String uid = firebaseUser.getUid();
 
 
-                        User user = new User(uid, name, email);
+                        User user = new User(uid, name, email, 10);
                         user.setNew(isNewUser);
                         user.setSuccess(true);
                         newUser.setValue(user);
@@ -183,12 +203,15 @@ public class AuthRepository {
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
 
                                         if (documentSnapshot != null) {
+
                                             User user = documentSnapshot.toObject(User.class);
                                             user.setSuccess(true);
-                                            userLoged.setValue(user);
 
                                             //save user to shared prefs
                                             sharedPrefData.saveUser(user);
+
+                                            userLoged.setValue(user);
+
                                         }
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
@@ -214,6 +237,42 @@ public class AuthRepository {
         return userLoged;
     }
 
+    //Get user
+    public MutableLiveData<User> getUser() {
+        MutableLiveData<User> userLive = new MutableLiveData<>();
+
+
+        db.collection("users")
+                .document(mAuth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                        if (documentSnapshot != null) {
+
+                            User user = documentSnapshot.toObject(User.class);
+                            user.setSuccess(true);
+
+                            //save user to shared prefs
+                            sharedPrefData.saveUser(user);
+
+                            userLive.setValue(user);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.v("Login-Get Data error : ", e.getMessage().toString());
+                User user = new User();
+                user.setSuccess(false);
+                userLive.setValue(user);
+            }
+        });
+
+        return userLive;
+    }
+
 
     // log out user from both auth and db
     public MutableLiveData<User> logOut() {
@@ -232,50 +291,8 @@ public class AuthRepository {
         return userLive;
     }
 
-    // log out just from db
-    public MutableLiveData<Boolean> logOutFromDb() {
-        MutableLiveData<Boolean> success = new MutableLiveData<>();
 
-        db.collection("users")
-                .document(mAuth.getCurrentUser().getUid())
-                .update("online", false)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        success.setValue(true);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.v("Error log out: ", e.getMessage());
-                success.setValue(false);
-            }
-        });
 
-        return success;
-    }
 
-    // log in just to db
-    public MutableLiveData<Boolean> logInToDb() {
-        MutableLiveData<Boolean> success = new MutableLiveData<>();
-
-        db.collection("users")
-                .document(mAuth.getCurrentUser().getUid())
-                .update("online", true)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        success.setValue(true);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.v("Error log out: ", e.getMessage());
-                success.setValue(false);
-            }
-        });
-
-        return success;
-    }
 
 }

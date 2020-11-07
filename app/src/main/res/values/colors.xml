@@ -29,6 +29,9 @@
     <color name="colorLightBrown">#503938</color>
     <color name="colorGreen">#006241</color>
     <color name="colorTransparentGreen">#4D00625F</color>
+    <color name="colorTransparentWhite">#00FFFFFF</color>
+    <color name="colorLowTransparentWhite">#51FFFFFF</color>
+    <color name="colorOrange">#FF5722</color>
 
 
 </resources>

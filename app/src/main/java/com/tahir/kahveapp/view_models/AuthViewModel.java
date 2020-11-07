@@ -21,8 +21,7 @@ public class AuthViewModel extends AndroidViewModel {
     //login with email and password,live user
     public LiveData<User> signedInUser;
     public LiveData<User> logOutUserLive;
-    public LiveData<Boolean> logOutSuccessLive;
-    public LiveData<Boolean> logInSuccessLive;
+    public LiveData<User> userLive;
 
 
     public AuthViewModel(@NonNull Application application) {
@@ -47,16 +46,13 @@ public class AuthViewModel extends AndroidViewModel {
         signedInUser = authRepository.loginUser(email, password);
     }
 
+    public void setUser(){
+        userLive = authRepository.getUser();
+    }
+
     public void logOut(){
         logOutUserLive = authRepository.logOut();
     }
 
-    public void logOutFromDb(){
-        logOutSuccessLive = authRepository.logOutFromDb();
-    }
-
-    public void logInToDb(){
-        logInSuccessLive = authRepository.logInToDb();
-    }
 
 }

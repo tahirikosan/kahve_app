@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="12dp"
+    android:background="@drawable/coffee_bg"
     tools:context=".ui.MainActivity">
 
 
@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_marginHorizontal="12dp"
         android:visibility="gone">
 
         <LinearLayout
@@ -55,19 +56,56 @@
         android:id="@+id/orders_pane"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="12dp"
         android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/helvetica_neue"
+            android:maxLength="20"
+            android:text="Ücret: 30.99 ₺"
+            android:textColor="@color/colorBrown"
+            android:textSize="24sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:id="@+id/tv_discount_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/helvetica_neue"
+            android:maxLength="20"
+            android:text="İndirim: 5.99 ₺"
+            android:textColor="@color/colorGreen"
+            android:textSize="18sp"
+            android:textStyle="normal" />
+
+        <ImageView
+            android:id="@+id/iv_goto_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/ic_baseline_account_circle_24"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_my_orders"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginVertical="12dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginBottom="144dp"
             android:visibility="visible"/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/menu_pane"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="350dp"
             android:layout_centerInParent="true"
             android:layout_marginHorizontal="4dp"
             android:visibility="gone"
@@ -75,12 +113,13 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp">
+                android:layout_height="350dp"
+                android:background="@drawable/coffee_bg_2">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="350dp"
+                    android:layout_margin="12dp"
                     android:orientation="vertical">
 
                     <RelativeLayout

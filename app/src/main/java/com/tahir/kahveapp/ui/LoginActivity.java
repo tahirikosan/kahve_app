@@ -25,6 +25,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.tahir.kahveapp.R;
+import com.tahir.kahveapp.data.models.Order;
 import com.tahir.kahveapp.data.models.User;
 import com.tahir.kahveapp.view_models.AuthViewModel;
 
@@ -36,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
     public static final String USER = "USER";
 
     private GoogleSignInClient mClient;
-    private FirebaseAuth mAuth;
     private AuthViewModel authViewModel;
 
 
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private TextView tvRegister;
     private Button btnLogin;
-    private SignInButton btnGoogleSing;
+    private Button btnGoogleSing;
 
     private String email;
     private String password;
@@ -137,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(User user) {
                     if (user.isSuccess()) {
-                        goToMainActivity(user);
+                        goToMainActivity();
                         progressDialog.dismiss();
                     }else{
                         progressDialog.dismiss();
@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (authenticatedUser.isNew()) {
                     createUserInDB(authenticatedUser);
                 } else {
-                    goToMainActivity(authenticatedUser);
+                    goToMainActivity();
                 }
 
             }else{
@@ -207,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
         authViewModel.createdUserInDB.observe(this, user -> {
             if(user.isSuccess()){
                 if(user.isCreated()){
-                    goToMainActivity(authenticatedUser);
+                    goToMainActivity();
                 }
                 progressDialog.dismiss();
             }else{
@@ -218,11 +218,24 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goToMainActivity(User user){
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.putExtra(USER,  user);
-        startActivity(intent);
-        finish();
+    private void goToMainActivity(){
+
+        authViewModel.setUser();
+        authViewModel.userLive.observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if (user.isSuccess()) {
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }else{
+                    Toast.makeText(LoginActivity.this, "Kullanıcıya erişilemiyor", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 
     private void showProgressDialog(){

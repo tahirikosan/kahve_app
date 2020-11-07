@@ -22,11 +22,9 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
     private OnItemClickListener mListener;
     private List<Menu> menuList;
-    private String lessonType;
 
-
-    public MenuAdapter(List<Menu> lessonList){
-        this.menuList = lessonList;
+    public MenuAdapter(List<Menu> menuList){
+        this.menuList = menuList;
     }
 
 
@@ -42,7 +40,7 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MenuHolder> {
 
         Menu currentItem = menuList.get(position);
         holder.tvItemName.setText(currentItem.getItemName());
-        holder.tvItemPrice.setText(currentItem.getItemPrice());
+        holder.tvItemPrice.setText(currentItem.getItemPrice() + " TL");
 
         Picasso.get().load(currentItem.getItemImageUrl()).fit().centerCrop().into(holder.ivItemPicture);
 
