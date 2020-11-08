@@ -291,6 +291,33 @@ public class AuthRepository {
         return userLive;
     }
 
+    //send password reset mail to the email
+    public MutableLiveData<Boolean> resetPassword(String email){
+        MutableLiveData<Boolean> success = new MutableLiveData<>();
+
+        mAuth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            success.setValue(true);
+                        }else{
+                            success.setValue(false);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.v("Password reset error" , e.getMessage());
+                success.setValue(false);
+            }
+        });
+
+        return success;
+    }
+
+
+
 
 
 

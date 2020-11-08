@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser(String email, String password, String name){
 
         if(email.isEmpty() || password.isEmpty() ||name.isEmpty()){
-            Toast.makeText(this, "Please all fill inputs", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lütfen bütün boşlukları doldurunuz", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -150,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }else{
-                    Toast.makeText(RegisterActivity.this, "Kayıt hatası, lütfen bizimle iletişime geçin.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Kayıt hatası, lütfen güçlü bir şifre kullanın.", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }

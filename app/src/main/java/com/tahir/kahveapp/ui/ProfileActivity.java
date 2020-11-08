@@ -1,6 +1,7 @@
 package com.tahir.kahveapp.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -22,6 +23,8 @@ import com.tahir.kahveapp.view_models.AuthViewModel;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    public static final String MY_ROSETTE = "MY_ROSETTE";
+
     private TextView tvName;
     private TextView tvPoint;
     private TextView tvEditName;
@@ -31,10 +34,14 @@ public class ProfileActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private ImageView ivSettings;
     private ImageView ivCloseSettings;
+    private ImageView ivHelp;
+    private CardView cvRosetteMarket;
     private BottomSheetBehavior settingsBottomSheetbBehaviour;
     private RelativeLayout rlSettingsSheet;
 
     private AuthViewModel authViewModel;
+
+    private int myRosette = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,8 @@ public class ProfileActivity extends AppCompatActivity {
         tvLogOut = findViewById(R.id.tv_log_out);
         progressBar = findViewById(R.id.progress_bar);
         ivSettings = findViewById(R.id.iv_settings);
+        ivHelp = findViewById(R.id.iv_help);
+        cvRosetteMarket = findViewById(R.id.cv_rosette_market);
         ivCloseSettings = findViewById(R.id.iv_close_settings);
         rlSettingsSheet = findViewById(R.id.rl_profile_settings_sheet);
 
@@ -102,6 +111,24 @@ public class ProfileActivity extends AppCompatActivity {
                 logOut();
             }
         });
+
+        ivHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, InfoActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cvRosetteMarket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, RosetMarketActivity.class);
+                intent.putExtra(MY_ROSETTE, myRosette);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void getUser(){
@@ -112,6 +139,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 if(user.isSuccess()){
                     setUI(user);
+                    myRosette = user.getPoint();
                 }else{
                     Toast.makeText(ProfileActivity.this, "Kullanıcı verileri alınamadı", Toast.LENGTH_SHORT).show();
                 }

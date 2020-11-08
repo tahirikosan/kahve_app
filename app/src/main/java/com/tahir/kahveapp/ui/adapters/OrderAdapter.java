@@ -46,7 +46,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         
         if(currentItem.getOrderStatus().equals("prepare")){
             holder.ivOrderStatus.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_prepare));
-        }else{
+        }else {
             holder.ivOrderStatus.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_ready));
         }
 

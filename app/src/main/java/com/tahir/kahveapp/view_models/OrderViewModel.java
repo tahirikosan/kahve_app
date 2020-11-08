@@ -21,11 +21,30 @@ public class OrderViewModel extends AndroidViewModel {
     public LiveData<List<Order>> orderLive;
     public LiveData<List<String>> orderIDsLive;
     public LiveData<Value> valueLive;
+    public LiveData<Boolean> rosetteOrderStatus;
+    public LiveData<Boolean> haveTableLive;
+    public LiveData<Boolean> tookTableLive;
 
     public OrderViewModel(@NonNull Application application) {
         super(application);
 
-        repository = new OrderRepository();
+        repository = new OrderRepository(application);
+    }
+
+    //take table
+    public void takeTable(String tableID){
+        tookTableLive = repository.takeTable(tableID);
+    }
+
+
+    //check if table already taken
+    public void checkTable(){
+        haveTableLive = repository.checkTable();
+    }
+
+    // buy stuffs with rosette
+    public void setRosetteOrderStatus(String buyType, int myRosette){
+        rosetteOrderStatus = repository.buyWithRosette(buyType, myRosette);
     }
 
     //sets system values

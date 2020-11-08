@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="12dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="12dp"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tv_total_price"
@@ -67,7 +67,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/helvetica_neue"
             android:maxLength="20"
-            android:text="Ücret: 30.99 ₺"
+            android:text="Ücret: 0₺"
             android:textColor="@color/colorBrown"
             android:textSize="24sp"
             android:textStyle="normal" />
@@ -80,7 +80,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/helvetica_neue"
             android:maxLength="20"
-            android:text="İndirim: 5.99 ₺"
+            android:text="İndirim: 0 ₺"
             android:textColor="@color/colorGreen"
             android:textSize="18sp"
             android:textStyle="normal" />

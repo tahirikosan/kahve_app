@@ -25,7 +25,9 @@ import com.tahir.kahveapp.data.models.Order;
 import com.tahir.kahveapp.data.models.Value;
 import com.tahir.kahveapp.utils.SharedPrefData;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,9 +37,12 @@ public class OrderRepository {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private FirebaseUser authUser;
+    SharedPrefData sharedPrefData;
 
-    public OrderRepository() {
 
+    public OrderRepository(Context context) {
+
+        sharedPrefData = new SharedPrefData(context);
         mAuth = FirebaseAuth.getInstance();
         authUser = mAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
@@ -70,8 +75,7 @@ public class OrderRepository {
                             //add order id to table collection
                             db.collection("tables")
                                     .document(tableID)
-                                    .update("orderIDs", FieldValue.arrayUnion(newOrderReference.getId()),
-                                        "tableOwnerID", authUser.getUid())
+                                    .update("orderIDs", FieldValue.arrayUnion(newOrderReference.getId()))
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -139,6 +143,8 @@ public class OrderRepository {
                     //If there is no error then get orders
                     db.collection("orders")
                             .whereEqualTo("tableID", tableID)
+                            .whereEqualTo("customerID", mAuth.getCurrentUser().getUid())
+                            .whereIn("orderStatus", Arrays.asList("prepare", "ready"))
                             .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                 @Override
                                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -242,6 +248,100 @@ public class OrderRepository {
                 , "prepare"
         );
         return order;
+    }
+
+    //decrease user rosette and buy stuff
+    public MutableLiveData<Boolean> buyWithRosette(String buyType, int myRosette){
+        MutableLiveData<Boolean> success = new MutableLiveData<>();
+
+        Map<String, Object> rosetteOrder = new HashMap<>();
+        rosetteOrder.put("orderStatus", "preparing");
+        rosetteOrder.put("orderType", buyType);
+        rosetteOrder.put("tableID", sharedPrefData.loadTableID());
+        rosetteOrder.put("userID", mAuth.getCurrentUser().getUid());
+
+        DocumentReference buyRequest =   db.collection("rosetteOrders").document();
+
+        buyRequest.set(rosetteOrder)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        db.collection("users")
+                                .document(mAuth.getCurrentUser().getUid())
+                                .update("point", myRosette)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        success.setValue(true);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                success.setValue(false);
+                                Log.v("Buy with rosette error" , e.getMessage());
+                            }
+                        });
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                success.setValue(false);
+                Log.v("Buy with rosette error" , e.getMessage());
+            }
+        });
+
+        return success;
+    }
+
+    //checks table
+    public MutableLiveData<Boolean> checkTable(){
+        MutableLiveData<Boolean> haveTable = new MutableLiveData<>();
+
+        db.collection("tables")
+                .whereEqualTo("tableOwnerID", mAuth.getCurrentUser().getUid())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        if(queryDocumentSnapshots.getDocuments().size() != 0){
+                            haveTable.setValue(true);
+                        }else{
+                            haveTable.setValue(false);
+                        }
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                haveTable.setValue(false);
+            }
+        });
+
+        return haveTable;
+    }
+
+    //take table
+    public MutableLiveData<Boolean> takeTable(String tableID){
+        MutableLiveData<Boolean> tookTable = new MutableLiveData<>();
+
+        db.collection("tables")
+                .document(tableID)
+                .update("tableOwnerID", mAuth.getCurrentUser().getUid())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        tookTable.setValue(true);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                tookTable.setValue(false);
+            }
+        });
+
+        return tookTable;
     }
 
 }

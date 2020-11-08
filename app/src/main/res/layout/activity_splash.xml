@@ -2,13 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite">
+    android:background="@drawable/coffee_bg_2">
 
     <ImageView
         android:id="@+id/iv_splash_bee"
         android:layout_width="match_parent"
         android:layout_height="256dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/macchiato"/>
+        android:src="@drawable/ic_happy_coffee"/>
 
 </RelativeLayout>

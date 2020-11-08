@@ -10,6 +10,8 @@ public class SharedPrefData {
 
     public static final String DATA = "DATA";
     public static final String USER = "USER";
+    public static final String TABLE_ID = "TABLE_ID";
+    public static final String SHOW_INFO = "SHOW_INFO";
 
     private Context context;
     private SharedPreferences sharedPreferences;
@@ -33,6 +35,23 @@ public class SharedPrefData {
         editor.commit();
     }
 
+    public void saveShowInfo(){
+        editor.putBoolean(SHOW_INFO, true);
+        editor.commit();
+    }
+
+    public boolean loadShowInfo(){
+        return sharedPreferences.getBoolean(SHOW_INFO, false);
+    }
+
+    public void saveTableID(String tableID){
+        editor.putString(TABLE_ID, tableID);
+        editor.commit();
+    }
+
+    public String loadTableID(){
+        return sharedPreferences.getString(TABLE_ID, "");
+    }
 
     // Loads user
     public User loadUser(){

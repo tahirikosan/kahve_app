@@ -8,16 +8,26 @@
     tools:context=".ui.ProfileActivity">
 
     <ImageView
+        android:id="@+id/coffe_top"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:scaleType="centerCrop"
         android:src="@drawable/coffe_bg_4"/>
+
+    <ImageView
+        android:id="@+id/iv_help"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_below="@id/coffe_top"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_help"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="270dp"
         android:orientation="vertical">
 
         <TextView
@@ -40,7 +50,7 @@
             android:textAlignment="center"
             android:fontFamily="@font/helvetica_neue"
             android:maxLength="20"
-            android:text="Kahve Çekirdekleri"
+            android:text="Rozetlerim"
             android:textColor="@color/colorGreen"
             android:textSize="16sp"
             android:textStyle="normal" />
@@ -63,18 +73,19 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginLeft="4dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_coffee_beans"/>
+                android:src="@drawable/ic_rosette_icon"/>
 
         </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="300dp"
-            android:layout_height="48dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_horizontal"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:progress="2500"
             android:max="5000"
@@ -87,12 +98,16 @@
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
+
+
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginTop="2dp"
                 android:src="@drawable/ic_coffee_cup"/>
+
+
 
             <ImageView
                 android:layout_width="40dp"
@@ -109,8 +124,111 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cofe_font"
+                android:textAlignment="center"
+                android:text="500"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_rosette_icon"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cofe_font"
+                android:layout_marginLeft="100dp"
+                android:textAlignment="center"
+                android:text="2500"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_rosette_icon"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cofe_font"
+                android:layout_marginLeft="100dp"
+                android:textAlignment="center"
+                android:text="5000"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:src="@drawable/ic_rosette_icon"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="4dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helvetica_neue"
+                android:textAlignment="center"
+                android:text="İstenilen 2 içecek"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helvetica_neue"
+                android:layout_marginLeft="25dp"
+                android:textAlignment="center"
+                android:text="Sürpriz Hediye"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helvetica_neue"
+                android:layout_marginLeft="25dp"
+                android:textAlignment="center"
+                android:text="Her hafta ücretsiz bir kahve"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
 
     <ImageView
@@ -122,6 +240,37 @@
         android:layout_margin="12dp"
         android:src="@drawable/ic_baseline_settings_24"/>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_rosette_market"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentBottom="true"
+        app:cardBackgroundColor="@color/colorTransparentWhite"
+        app:cardCornerRadius="8dp"
+        android:layout_margin="4dp"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_rosette_icon" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <!--Options Panel-->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -131,7 +280,7 @@
         <RelativeLayout
             android:id="@+id/rl_profile_settings_sheet"
             android:layout_width="match_parent"
-            android:layout_height="280dp"
+            android:layout_height="300dp"
             android:background="@drawable/coffee_bg_2"
             app:behavior_hideable="true"
             app:behavior_peekHeight="0dp"
@@ -143,14 +292,14 @@
                 android:id="@+id/tv_account_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginVertical="12dp"
-                android:textSize="20sp"
-                android:fontFamily="@font/helvetica_neue"
                 android:layout_gravity="center_vertical"
-                android:textStyle="normal"
+                android:layout_marginVertical="12dp"
+                android:layout_marginLeft="24dp"
+                android:fontFamily="@font/helvetica_neue"
+                android:text="Hesap Ayarları"
                 android:textColor="@color/colorGreen"
-                android:text="Hesap Ayarları"/>
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
 
             <androidx.core.widget.NestedScrollView
@@ -174,19 +323,19 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="24dp"
-                            android:src="@drawable/ic_baseline_email_24"/>
+                            android:src="@drawable/ic_baseline_email_24" />
 
                         <TextView
                             android:id="@+id/tv_edit_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="24dp"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/helvetica_neue"
                             android:layout_gravity="center_vertical"
-                            android:textStyle="normal"
+                            android:layout_marginLeft="24dp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:text="Email Değiş"
                             android:textColor="@color/colorGreen"
-                            android:text="Email Değiş"/>
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
 
@@ -200,19 +349,19 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="24dp"
-                            android:src="@drawable/ic_baseline_lock_24"/>
+                            android:src="@drawable/ic_baseline_lock_24" />
 
                         <TextView
                             android:id="@+id/tv_edit_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="24dp"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/helvetica_neue"
                             android:layout_gravity="center_vertical"
-                            android:textStyle="normal"
+                            android:layout_marginLeft="24dp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:text="Şifre Değiş"
                             android:textColor="@color/colorGreen"
-                            android:text="Şifre Değiş"/>
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
 
@@ -226,21 +375,22 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="24dp"
-                            android:src="@drawable/ic_baseline_account_circle_24"/>
+                            android:src="@drawable/ic_baseline_account_circle_24" />
 
                         <TextView
                             android:id="@+id/tv_edit_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="24dp"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/helvetica_neue"
                             android:layout_gravity="center_vertical"
-                            android:textStyle="normal"
+                            android:layout_marginLeft="24dp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:text="Kullanıcı Adı Değiş"
                             android:textColor="@color/colorGreen"
-                            android:text="Kullanıcı Adı Değiş"/>
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -252,48 +402,22 @@
                             android:layout_height="24dp"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="24dp"
-                            android:src="@drawable/ic_baseline_shopping_cart_24"/>
-
-                        <TextView
-                            android:id="@+id/tv_my_orders"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="24dp"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/helvetica_neue"
-                            android:layout_gravity="center_vertical"
-                            android:textStyle="normal"
-                            android:textColor="@color/colorGreen"
-                            android:text="Siparişlerim"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="24dp"
-                            android:src="@drawable/ic_baseline_power_settings_new_24"/>
+                            android:src="@drawable/ic_baseline_power_settings_new_24" />
 
                         <TextView
                             android:id="@+id/tv_log_out"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="24dp"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/helvetica_neue"
                             android:layout_gravity="center_vertical"
-                            android:textStyle="normal"
+                            android:layout_marginLeft="24dp"
+                            android:fontFamily="@font/helvetica_neue"
+                            android:text="Çıkış Yap"
                             android:textColor="@color/colorGreen"
-                            android:text="Çıkış Yap"/>
+                            android:textSize="16sp"
+                            android:textStyle="normal" />
 
                     </LinearLayout>
-                    
+
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>
@@ -303,15 +427,16 @@
                 android:id="@+id/iv_close_settings"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="16dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"/>
+                android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
 
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 
 

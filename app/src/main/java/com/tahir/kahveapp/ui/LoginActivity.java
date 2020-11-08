@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private TextView tvRegister;
+    private TextView tvForgotPass;
     private Button btnLogin;
     private Button btnGoogleSing;
 
@@ -91,6 +92,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        tvForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
     }
 
     //Set layout components
@@ -100,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btn_login);
         tvRegister = findViewById(R.id.tv_register);
         btnGoogleSing = findViewById(R.id.btn_google_signin);
+        tvForgotPass = findViewById(R.id.tv_forgot_pass);
 
         progressDialog = new ProgressDialog(this);
     }

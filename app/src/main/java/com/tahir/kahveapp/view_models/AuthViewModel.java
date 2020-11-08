@@ -22,6 +22,7 @@ public class AuthViewModel extends AndroidViewModel {
     public LiveData<User> signedInUser;
     public LiveData<User> logOutUserLive;
     public LiveData<User> userLive;
+    public LiveData<Boolean> isResetMailSend;
 
 
     public AuthViewModel(@NonNull Application application) {
@@ -29,6 +30,7 @@ public class AuthViewModel extends AndroidViewModel {
 
         authRepository = new AuthRepository(application);
     }
+
 
     public void signInWithGoogle(AuthCredential authCredential){
         authenticatedUser = authRepository.signInWithGoogle(authCredential);
@@ -52,6 +54,10 @@ public class AuthViewModel extends AndroidViewModel {
 
     public void logOut(){
         logOutUserLive = authRepository.logOut();
+    }
+
+    public void resetPassword(String email){
+        isResetMailSend = authRepository.resetPassword(email);
     }
 
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.tahir.kahveapp.data.models.User;
 import com.tahir.kahveapp.data.models.Value;
 import com.tahir.kahveapp.ui.adapters.MenuAdapter;
 import com.tahir.kahveapp.ui.adapters.OrderAdapter;
+import com.tahir.kahveapp.utils.SharedPrefData;
 import com.tahir.kahveapp.view_models.AuthViewModel;
 import com.tahir.kahveapp.view_models.OrderViewModel;
 
@@ -95,10 +97,12 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
         setOrderViewModel();
         initAuthViewModel();
 
+        showInfo();
+
+        checkTable();
+
         //gets live menu list from view model
         getMenu();
-
-      //  getOrderIDList(tableID);
 
         //gets live order list from view model
         getOrder(tableID);
@@ -143,6 +147,54 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
 
     }
 
+    //checks if user already taken a table
+    public void takeTable(String tableID){
+        orderViewModel.takeTable(tableID);
+        orderViewModel.tookTableLive.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    SharedPrefData sharedPrefData = new SharedPrefData(MainActivity.this);
+                    sharedPrefData.saveTableID(tableID);
+
+                    closeQrPane();
+                    openOrdersPane();
+                }else{
+                    Toast.makeText(MainActivity.this, "Masa kayıt işlemi yapılamadı", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+    //checks if user already taken a table
+    public void checkTable(){
+        orderViewModel.checkTable();
+        orderViewModel.haveTableLive.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    openOrdersPane();
+                    closeQrPane();
+                }else{
+                    openQrPane();
+                    closeOrdersPane();
+                }
+            }
+        });
+    }
+
+    private void showInfo(){
+        SharedPrefData sharedPrefData = new SharedPrefData(this);
+        boolean isFirstOpen = sharedPrefData.loadShowInfo();
+
+        if (!isFirstOpen) {
+            sharedPrefData.saveShowInfo();
+            Intent intent = new Intent(MainActivity.this, InfoActivity.class);
+            startActivity(intent);
+        }
+    }
+
 
     private void readQr(){
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -160,8 +212,7 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
             if(result.getContents() != null){
                 tableID = result.getContents();
 
-                closeQrPane();
-                openOrdersPane();
+                takeTable(tableID);
 
             }else{
                 Toast.makeText(this, "Geçersiz QR Kod, lütfen geçerli bir kod tarayınız.", Toast.LENGTH_SHORT).show();
@@ -170,17 +221,6 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-
-    ///get menu list from viewmodel
-    private void getOrderIDList(String tableID){
-        orderViewModel.setOrderIDsLive(tableID);
-        orderViewModel.orderIDsLive.observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> orderIDs) {
-                orderIDList = orderIDs;
-            }
-        });
     }
 
 
@@ -333,7 +373,6 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
                                 discount += totalPrice * value.getDiscountPercent();
                             }
                             discount += value.getStaticDiscount();
-                            discount += point * value.getDiscountFactor();
 
                             //control max discount amount
                             if(discount >= value.getMaxDiscount()){

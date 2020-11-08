@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kahveapp">
-        <activity android:name=".ui.EditEmailActivity"></activity>
+        <activity android:name=".ui.ForgotPasswordActivity"></activity>
+        <activity android:name=".ui.RosetMarketActivity" />
+        <activity android:name=".ui.InfoActivity" />
+        <activity android:name=".ui.EditEmailActivity" />
         <activity android:name=".ui.EditNameActivity" />
         <activity android:name=".ui.EditPasswordActivity" />
         <activity android:name=".ui.ProfileActivity" />
