@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
 
         showInfo();
 
-        checkTable();
-
         //gets live menu list from view model
         getMenu();
 
@@ -212,8 +210,11 @@ public class MainActivity extends AppCompatActivity implements MenuAdapter.OnIte
             if(result.getContents() != null){
                 tableID = result.getContents();
 
-                takeTable(tableID);
+                checkTable();
 
+                takeTable(tableID);
+                //gets live order list from view model
+                getOrder(tableID);
             }else{
                 Toast.makeText(this, "Geçersiz QR Kod, lütfen geçerli bir kod tarayınız.", Toast.LENGTH_SHORT).show();
             }
